@@ -63,4 +63,40 @@ const clerkWebhooks = async (req, res) => {
   }
 };
 
-export {clerkWebhooks};
+
+// API CONTROLLER FUCNTION TO GET USER AVAILABLE CREDITS DATA
+
+// const userCredits = async(req,res)=>{
+//   try {
+
+//     const {clerkId} = req.body;
+
+//     const user = await User.findOne({clerkId});
+
+//     res.json({success:true, credits:user.creditBalance});
+
+//   } catch (error) {
+//     console.log(error.message)
+//     res.json({success:false, message:error.message});
+//   }
+// }
+
+const userCredits = async (req, res) => {
+  try {
+    const clerkId = req.clerkId; // Use the clerkId from the authUser middleware
+
+    const user = await User.findOne({ clerkId });
+
+    if (user) {
+      res.json({ success: true, credits: user.creditBalance });
+    } else {
+      res.json({ success: false, message: 'User not found' });
+    }
+  } catch (error) {
+    console.log(error.message);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+export {clerkWebhooks, userCredits};
+

@@ -1,7 +1,12 @@
-import React from 'react'
-import { assets } from '../assets/assets'
+import React, { useContext } from "react";
+import { assets } from "../assets/assets";
+import { AppContext } from "../context/AppContext";
 
 const Upload = () => {
+
+  const {removeBg} = useContext(AppContext);
+
+
   return (
     <div className="pb-16">
       {/* Title */}
@@ -21,7 +26,7 @@ const Upload = () => {
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Upload
+export default Upload;
